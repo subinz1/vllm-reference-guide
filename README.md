@@ -40,22 +40,33 @@ substitute for the upstream documentation; links to the primary sources live in
 
 The full sequence and prerequisites are in [`docs/roadmap.md`](docs/roadmap.md).
 
-## First five days
+## Tutorial modules
 
-1. [Establish an environment baseline](docs/day-01-environment-baseline.md)
-2. [Install deliberately](docs/day-02-installation.md)
-3. [Generate offline](docs/day-03-offline-generation.md)
-4. [Use chat inputs correctly](docs/day-04-chat-inputs.md)
-5. [Control sampling and record experiments](docs/day-05-sampling.md)
+| Module | Focus | Learning mode |
+| --- | --- | --- |
+| [01 — Foundations](01_foundations/) | Platform choice, environments, model provenance | Read + local checks |
+| [02 — Offline inference](02_offline_inference/) | `LLM`, `SamplingParams`, chat, and result inspection | Accelerator lab |
+| [03 — OpenAI-compatible server](03_openai_server/) | Startup, health, completions, and client integration | Local server lab |
+| [04 — Request semantics](04_request_semantics/) | Templates, streaming, structured requests, tools | API contract lab |
+| [05 — Engine internals](05_engine_internals/) | Scheduler, KV cache, prefill, and prefix reuse | Architecture lab |
+| [06 — Performance](06_performance/) | Workload design, latency, throughput, and memory | Measurement lab |
+| [07 — Distributed serving](07_distributed_serving/) | TP, PP, DP, MoE, and deployment topology | Multi-accelerator lab |
+| [08 — Security](08_security/) | Authentication, exposure, and model provenance | Operations lab |
+| [09 — Observability](09_observability/) | Metrics, logs, capacity signals, and diagnosis | Operations lab |
+| [10 — Capstone](10_capstone/) | A deployment design and operating review | Independent project |
+
+Start with the [foundation module](01_foundations/) and then complete
+[`02_offline_inference`](02_offline_inference/) before starting a server.
 
 ## Repository layout
 
 ```text
-docs/        Conceptual lessons and lab instructions
-examples/    Small programs intended to be read, adapted, and run
-exercises/   Prompts for independent practice
-checklists/  Review criteria before moving to the next phase
-references/  Primary documentation and source-map links
+01_foundations/ … 10_capstone/  Numbered tutorial modules
+docs/                              Daily lessons and curriculum notes
+examples/                          Small standalone programs
+exercises/                         Prompts for independent practice
+checklists/                        Review criteria before moving on
+references/                        Primary documentation and source-map links
 ```
 
 ## Working agreement
