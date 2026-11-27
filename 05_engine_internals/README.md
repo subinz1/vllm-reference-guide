@@ -15,6 +15,19 @@ observed latency and throughput.
 - Prefix caching can alter work completed for repeated prompt prefixes, but its
   effectiveness must be measured on the real workload.
 
+## First capacity calculation
+
+[`kv_cache_estimator.py`](kv_cache_estimator.py) makes the per-sequence KV-cache
+calculation explicit before any server flags are tuned. It intentionally omits
+weights, runtime buffers, and block fragmentation so those are documented as
+separate capacity decisions.
+
+```bash
+python kv_cache_estimator.py \
+  --layers 32 --kv-heads 8 --head-dim 128 \
+  --context-tokens 8192 --concurrency 16
+```
+
 Read the upstream [architecture overview][architecture] before tuning any
 flag. Follow it with the capacity worksheet in
 [`capacity_questions.md`](capacity_questions.md).
