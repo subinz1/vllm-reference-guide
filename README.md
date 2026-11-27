@@ -11,6 +11,43 @@ laptop from exercises that require a supported accelerator.
 > [Module 03](03_openai_server/). The guide is ordered; later modules assume
 > the earlier operational boundaries are understood.
 
+## About
+
+vLLM Reference Guide is a practical tutorial series for learning how modern
+LLM inference moves from a local generation call to a well-operated serving
+system. It combines small runnable examples with the reasoning needed to make
+safe decisions about model provenance, request semantics, cache capacity,
+parallelism, performance, and operations.
+
+The project is an independent learning resource and is not affiliated with or
+endorsed by the vLLM project. The upstream documentation remains the authority
+for supported platforms, releases, and runtime options.
+
+### Intended audience
+
+- Python engineers beginning with vLLM and LLM inference.
+- ML/platform engineers who need to operate an OpenAI-compatible inference API.
+- Contributors who want a structured route into vLLM architecture and source.
+
+### What this guide covers
+
+- Offline generation, chat templates, sampling, and structured request design.
+- The OpenAI-compatible server, client integration, streaming, and local safety
+  boundaries.
+- Scheduler and KV-cache concepts needed to interpret performance behavior.
+- Benchmark design, distributed-serving trade-offs, observability, security,
+  and production design review.
+
+### What it does not claim to be
+
+- A replacement for upstream vLLM documentation or release notes.
+- A universal hardware-sizing guide or a benchmark-result repository.
+- A source of model licences, access approvals, or production security policy.
+
+Each accelerator example is intentionally framed as a lab: record the actual
+hardware, driver/runtime, model revision, and workload before drawing a
+conclusion.
+
 ## Who this is for
 
 This guide is for engineers who know Python and basic transformer concepts but
@@ -33,9 +70,10 @@ substitute for the upstream documentation; links to the primary sources live in
 ## What you can run today
 
 The repository currently includes **10 tutorial modules**, **3 notebooks**,
-and **12 runnable helpers**. The executable material begins with environment
+and **20 runnable helpers**. The executable material begins with environment
 inspection and moves through offline inference, a loopback-only server, streaming
-clients, request validation, workload fixtures, and latency summaries.
+clients, request validation, capacity planning, topology review, service
+exposure checks, workload fixtures, and metrics summaries.
 
 ```bash
 git clone https://github.com/subinz1/vllm-reference-guide.git
@@ -103,8 +141,13 @@ Start with the [foundation module](01_foundations/) and then complete
 | [`01_foundations/foundation_lab.ipynb`](01_foundations/foundation_lab.ipynb) | Record platform facts before installation. | Any Python environment |
 | [`02_offline_inference/offline_inference.ipynb`](02_offline_inference/offline_inference.ipynb) | Inspect structured offline generation results. | Supported vLLM accelerator environment |
 | [`03_openai_server/server_lab.ipynb`](03_openai_server/server_lab.ipynb) | Discover and query a local OpenAI-compatible server. | Local server + Python client |
+| [`04_request_semantics/structured_output_contract.py`](04_request_semantics/structured_output_contract.py) | Check a JSON-schema request before an integration test. | Any Python environment |
+| [`05_engine_internals/kv_cache_estimator.py`](05_engine_internals/kv_cache_estimator.py) | Estimate KV-cache storage from model and workload dimensions. | Any Python environment |
 | [`06_performance/make_workload.py`](06_performance/make_workload.py) | Generate deterministic JSONL request fixtures. | Any Python environment |
 | [`06_performance/summarize_latencies.py`](06_performance/summarize_latencies.py) | Summarize recorded request-latency measurements. | Any Python environment |
+| [`07_distributed_serving/topology_planner.py`](07_distributed_serving/topology_planner.py) | Validate TP × PP × DP inventory arithmetic. | Any Python environment |
+| [`08_security/serve_config_review.py`](08_security/serve_config_review.py) | Surface server exposure and API-key handling decisions. | Any Python environment |
+| [`09_observability/prometheus_snapshot.py`](09_observability/prometheus_snapshot.py) | Summarize selected samples from a saved `/metrics` response. | Any Python environment |
 
 Every accelerator example is a lab template, not a performance promise. Record
 the model revision, tokenizer/template policy, vLLM version, hardware, and
