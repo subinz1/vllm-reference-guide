@@ -17,3 +17,11 @@ record the artefacts that influence output behavior.
 
 Complete [`deployment_review.md`](deployment_review.md) before exposing a
 server outside a development machine.
+
+[`serve_config_review.py`](serve_config_review.py) is a preflight prompt for
+the small set of exposure decisions that are easy to omit in a local command.
+It never reads or prints the API key itself.
+
+```bash
+python serve_config_review.py --host 127.0.0.1 --api-key-env VLLM_API_KEY
+```
